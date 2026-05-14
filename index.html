@@ -424,6 +424,88 @@
     color: rgba(0,0,0,0.72);
   }
 
+  /* ============ SERVICES (3 lines) ============ */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .service-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px -10px rgba(11,29,41,0.18);
+  }
+  .service-icon-wrap {
+    width: 54px; height: 54px;
+    background: rgba(11,29,41,0.06);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
+  .service-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .service-list { list-style: none; padding: 0; margin: 0; }
+  .service-list li {
+    font-size: 14.5px;
+    color: var(--muted);
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(11,29,41,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.45;
+  }
+  .service-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .service-list li::before {
+    content: "";
+    width: 5px; height: 5px;
+    background: var(--green-deep);
+    border-radius: 50%;
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ============ METHODOLOGY tags per phase ============ */
+  .fase-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .fase-tag {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .how-lead {
+    text-align: center;
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 640px;
+    margin: -56px auto 64px;
+    line-height: 1.6;
+  }
+
   /* ============ QUOTE ============ */
   .quote-section {
     background: var(--black);
@@ -1326,6 +1408,7 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: 1fr; max-width: 580px; margin-left: auto; margin-right: auto; }
     .showcase-grid { grid-template-columns: 1fr 1fr; }
     .case-grid { grid-template-columns: 1fr; gap: 48px; }
     .case-grid > div:last-child { aspect-ratio: 16/10 !important; max-height: 360px; }
@@ -1609,54 +1692,66 @@
   </div>
 </section>
 
-<!-- ============ FEATURES ============ -->
+<!-- ============ SERVICES (3 lines) ============ -->
 <section class="features-section">
   <div class="container">
-    <h2 class="reveal">Estás comprometido con el crecimiento de tu empresa.</h2>
-    <p class="lead reveal">Nosotros te ayudamos a llegar más rápido.</p>
-    <div class="features-grid">
-      <div class="feature reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+    <h2 class="reveal">Cómo te ayudamos a crecer.</h2>
+    <p class="lead reveal">Tres líneas de servicio que ordenan, controlan y dirigen tu gestión financiera.</p>
+    <div class="services-grid">
+      <article class="service-card reveal">
+        <div class="service-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/>
+            <rect x="7" y="13" width="3" height="5" rx="0.5"/>
+            <rect x="12" y="9" width="3" height="9" rx="0.5"/>
+            <rect x="17" y="5" width="3" height="13" rx="0.5"/>
+          </svg>
         </div>
-        <h3>Define tu dirección</h3>
-        <p>Enfoca tu energía en los objetivos financieros que realmente transformarán tu empresa.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c2-4 7-4 9 0s7 4 9 0"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>Consultoría financiera</h3>
+        <ul class="service-list">
+          <li>Diagnóstico financiero</li>
+          <li>Construcción y seguimiento de flujo de caja</li>
+          <li>Modelos financieros</li>
+          <li>Análisis de costos y márgenes</li>
+          <li>Planeación financiera</li>
+          <li>Evaluación de liquidez y capital de trabajo</li>
+        </ul>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9" rx="1.5"/>
+            <rect x="14" y="3" width="7" height="5" rx="1.5"/>
+            <rect x="14" y="12" width="7" height="9" rx="1.5"/>
+            <rect x="3" y="16" width="7" height="5" rx="1.5"/>
+          </svg>
         </div>
-        <h3>Rompe tus límites</h3>
-        <p>Identifica y reformula las creencias y prácticas financieras que han frenado el crecimiento de tu negocio.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg>
+        <h3>Estructuración y control</h3>
+        <ul class="service-list">
+          <li>Centros de costos</li>
+          <li>Tableros de control financiero</li>
+          <li>Indicadores de gestión</li>
+          <li>Estructuras de seguimiento</li>
+          <li>Organización de bases de información</li>
+          <li>Reportes periódicos</li>
+        </ul>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+          </svg>
         </div>
-        <h3>Activa el crecimiento</h3>
-        <p>Accede a herramientas, estrategias y al acompañamiento de un director financiero entrenado para transformar tus finanzas.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/><polyline points="9 11 11 13 14 9"/></svg>
-        </div>
-        <h3>Cumple tus metas</h3>
-        <p>Reorganiza tu flujo de caja, redefine tus prioridades y obtén los resultados que has estado buscando.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a9 9 0 1 0 9 9"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h3>Comprométete con la excelencia</h3>
-        <p>Recibe la guía que necesitas para construir una empresa rentable y un patrimonio sólido en el tiempo.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="feature-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-        </div>
-        <h3>Crea cambios duraderos</h3>
-        <p>Construye el momentum financiero que mantendrá a tu empresa fuerte cuando el mercado se ponga difícil.</p>
-      </div>
+        <h3>Acompañamiento estratégico</h3>
+        <ul class="service-list">
+          <li>Reuniones de seguimiento</li>
+          <li>Revisión de resultados</li>
+          <li>Priorización de decisiones</li>
+          <li>Recomendaciones estratégicas</li>
+          <li>Ajuste de herramientas y modelos</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
@@ -1669,29 +1764,89 @@
   </div>
 </section>
 
-<!-- ============ HOW IT WORKS ============ -->
+<!-- ============ METHODOLOGY (6 phases) ============ -->
 <section class="how-section" id="proceso">
   <div class="container">
     <h2 class="reveal">Cómo funciona</h2>
+    <p class="how-lead reveal">Una metodología estructurada en 6 fases que garantiza resultados consistentes en cada acompañamiento.</p>
     <div class="step reveal">
-      <div class="step-num">Paso 1</div>
+      <div class="step-num">Fase 1</div>
       <div class="step-content">
-        <h3>Sesión personalizada</h3>
-        <p>En una sesión de 30 minutos hacemos un diagnóstico profundo: cuáles son tus metas financieras, los desafíos actuales de tu empresa y las oportunidades reales que estás dejando sobre la mesa.</p>
+        <h3>Activación e inicio del servicio</h3>
+        <p>Arrancamos con una reunión de inicio para alinear expectativas, definir el alcance del trabajo y dejar las herramientas listas para operar desde el día uno.</p>
+        <div class="fase-tags">
+          <span class="fase-tag">Reunión de inicio</span>
+          <span class="fase-tag">Definición del alcance</span>
+          <span class="fase-tag">Alineación de expectativas</span>
+          <span class="fase-tag">Parametrización de herramientas</span>
+        </div>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num">Paso 2</div>
+      <div class="step-num">Fase 2</div>
       <div class="step-content">
-        <h3>Diseñamos tu estrategia</h3>
-        <p>Te conectamos con un director financiero estratégico que entiende tu industria. Juntos identificamos la causa raíz de lo que está frenando el crecimiento de tu empresa y trazamos el plan.</p>
+        <h3>Levantamiento de información</h3>
+        <p>Recolectamos y validamos toda la información financiera relevante. Estructuramos las bases de trabajo y verificamos la consistencia de los datos antes de analizar.</p>
+        <div class="fase-tags">
+          <span class="fase-tag">Recolección financiera</span>
+          <span class="fase-tag">Validación de soportes</span>
+          <span class="fase-tag">Bases de trabajo</span>
+          <span class="fase-tag">Consistencia de datos</span>
+        </div>
       </div>
     </div>
     <div class="step reveal">
-      <div class="step-num">Paso 3</div>
+      <div class="step-num">Fase 3</div>
       <div class="step-content">
-        <h3>Dirección financiera</h3>
-        <p>Inicias con el programa de dirección financiera de Grow Finance y cierras la brecha entre dónde estás y dónde quieres estar, con sistemas garantizados y acompañamiento integral.</p>
+        <h3>Diagnóstico y análisis</h3>
+        <p>Analizamos a fondo el flujo de caja, la estructura de costos, la rentabilidad y la liquidez. Identificamos los hallazgos clave que van a guiar las decisiones.</p>
+        <div class="fase-tags">
+          <span class="fase-tag">Flujo de caja</span>
+          <span class="fase-tag">Estructura de costos</span>
+          <span class="fase-tag">Rentabilidad</span>
+          <span class="fase-tag">Liquidez</span>
+          <span class="fase-tag">Hallazgos clave</span>
+        </div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">Fase 4</div>
+      <div class="step-content">
+        <h3>Diseño de herramientas y soluciones</h3>
+        <p>Construimos los modelos financieros, tableros de seguimiento, centros de costos, estructuras de reportes e indicadores que tu empresa necesita para operar con criterio.</p>
+        <div class="fase-tags">
+          <span class="fase-tag">Modelos financieros</span>
+          <span class="fase-tag">Tableros de seguimiento</span>
+          <span class="fase-tag">Centros de costos</span>
+          <span class="fase-tag">Reportes</span>
+          <span class="fase-tag">Indicadores clave</span>
+        </div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">Fase 5</div>
+      <div class="step-content">
+        <h3>Implementación y acompañamiento</h3>
+        <p>Reuniones periódicas para revisar avances, ajustar sobre la marcha y acompañarte en las decisiones financieras del día a día. No te dejamos solo con el plan.</p>
+        <div class="fase-tags">
+          <span class="fase-tag">Reuniones periódicas</span>
+          <span class="fase-tag">Ajustes sobre la marcha</span>
+          <span class="fase-tag">Revisión de avances</span>
+          <span class="fase-tag">Apoyo en decisiones</span>
+        </div>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">Fase 6</div>
+      <div class="step-content">
+        <h3>Seguimiento y mejora continua</h3>
+        <p>Hacemos seguimiento a los indicadores y al desempeño, formulamos recomendaciones de mejora y ajustamos la estrategia para que el progreso sea sostenido.</p>
+        <div class="fase-tags">
+          <span class="fase-tag">Seguimiento a indicadores</span>
+          <span class="fase-tag">Revisión de desempeño</span>
+          <span class="fase-tag">Recomendaciones</span>
+          <span class="fase-tag">Ajustes estratégicos</span>
+        </div>
       </div>
     </div>
   </div>
