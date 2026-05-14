@@ -103,6 +103,27 @@
     color: rgba(255,255,255,0.85);
   }
   .nav-links a:hover { color: var(--green); }
+  .nav-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-cta-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 11px 20px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .nav-cta-outline:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: rgba(93,211,168,0.06);
+  }
   .nav-cta {
     display: inline-block;
     background: var(--green);
@@ -539,6 +560,165 @@
     color: var(--black);
     max-width: 260px;
     font-weight: 500;
+  }
+
+  /* ============ STATS V2 — Vertical Cards ============ */
+  .stats-v2 {
+    padding: 140px 0;
+    background: var(--white);
+    color: var(--ink);
+    position: relative;
+  }
+  .stats-v2-head {
+    max-width: 1280px;
+    margin: 0 auto 64px;
+    padding: 0 24px;
+  }
+  .stats-v2-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin-bottom: 22px;
+  }
+  .stats-v2-eyebrow::before {
+    content: "";
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+  .stats-v2 h2 {
+    font-size: clamp(48px, 6.5vw, 96px);
+    font-weight: 800;
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .stats-v2-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: flex-start;
+  }
+  .stats-v2-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .stats-v2-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    border-radius: var(--radius);
+    overflow: hidden;
+    min-height: 220px;
+    transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .stats-v2-card:hover { transform: translateY(-4px); }
+  .stats-v2-card .card-arrow {
+    background: var(--green);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .stats-v2-card .card-arrow::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.12) 0px,
+      rgba(0,0,0,0.12) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+    opacity: .85;
+  }
+  .stats-v2-card .card-arrow svg {
+    position: relative;
+    z-index: 1;
+    width: 48px; height: 48px;
+  }
+  .stats-v2-card .card-body {
+    background: var(--ink);
+    color: var(--white);
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+  .stats-v2-card .card-num {
+    font-size: clamp(58px, 7vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+  .stats-v2-card .card-lbl {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.35;
+    max-width: 360px;
+  }
+  /* Color variants */
+  .stats-v2-card.v-light .card-arrow { background: #E8EEF4; }
+  .stats-v2-card.v-light .card-arrow::before {
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.07) 0, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 6px);
+  }
+  .stats-v2-card.v-light .card-arrow svg path,
+  .stats-v2-card.v-light .card-arrow svg polygon { fill: var(--ink); stroke: var(--ink); }
+  .stats-v2-card.v-light .card-body { background: var(--ink); }
+
+  .stats-v2-card.v-teal .card-arrow { background: var(--green); }
+  .stats-v2-card.v-teal .card-arrow svg path,
+  .stats-v2-card.v-teal .card-arrow svg polygon { fill: var(--ink); stroke: var(--ink); }
+  .stats-v2-card.v-teal .card-body { background: var(--ink); }
+
+  .stats-v2-card.v-dark .card-arrow {
+    background: #2A3B4F;
+  }
+  .stats-v2-card.v-dark .card-arrow::before {
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 6px);
+  }
+  .stats-v2-card.v-dark .card-arrow svg path,
+  .stats-v2-card.v-dark .card-arrow svg polygon { fill: var(--green); stroke: var(--green); }
+  .stats-v2-card.v-dark .card-body { background: var(--night); }
+
+  .stats-v2-aside {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+    padding-top: 20px;
+  }
+  .stats-v2-aside .aside-block {
+    margin-bottom: 240px;
+    opacity: 0.35;
+    transition: opacity .4s ease;
+  }
+  .stats-v2-aside .aside-block:last-child { margin-bottom: 0; }
+  .stats-v2-aside .aside-block.active { opacity: 1; }
+  .stats-v2-aside .aside-block h3 {
+    font-size: clamp(22px, 2.2vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .stats-v2-aside .aside-block p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.55;
+    max-width: 420px;
   }
 
   /* ============ TESTIMONIALS ============ */
@@ -1167,7 +1347,12 @@
   }
   @media (max-width: 968px) {
     .nav-links { display: none; }
+    .nav-cta-outline { display: none; }
     .nav-cta { padding: 10px 18px; font-size: 13px; }
+    .stats-v2-grid { grid-template-columns: 1fr; gap: 40px; }
+    .stats-v2-aside { position: static; }
+    .stats-v2-aside .aside-block { margin-bottom: 32px; opacity: 1; }
+    .stats-v2 h2 { font-size: clamp(40px, 8vw, 64px); }
     .section, .features-section, .stats-section, .quote-section, .how-section, .testimonials-section, .faq-section, .form-section, .showcase-section, .case-section, .final-cta-section, .press { padding: 72px 0; }
     .press { padding: 32px 0 40px; }
     .hero-grid, .split, .stats-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1206,7 +1391,15 @@
     .hero .subtitle { margin-bottom: 32px; }
     .hero-logo-card { padding: 14px 16px; margin-bottom: 24px; }
     .hero-trust { font-size: 12px; }
-    .features-section, .stats-section, .quote-section, .how-section, .testimonials-section, .faq-section, .form-section, .showcase-section, .case-section, .final-cta-section { padding: 64px 0; }
+    .features-section, .stats-section, .quote-section, .how-section, .testimonials-section, .faq-section, .form-section, .showcase-section, .case-section, .final-cta-section, .stats-v2 { padding: 64px 0; }
+    .stats-v2-head { margin-bottom: 40px; }
+    .stats-v2-card { grid-template-columns: 76px 1fr; min-height: 160px; }
+    .stats-v2-card .card-arrow svg { width: 32px; height: 32px; }
+    .stats-v2-card .card-body { padding: 22px 24px; }
+    .stats-v2-card .card-num { font-size: 56px; }
+    .stats-v2-card .card-lbl { font-size: 14px; }
+    .stats-v2-aside .aside-block h3 { font-size: 20px; }
+    .stats-v2-aside .aside-block p { font-size: 15px; }
     .features-section h2, .stats-section h2, .showcase-head h2, .case-section h2 { margin-bottom: 12px; }
     .features-section .lead { margin-bottom: 48px; }
     .testimonials-section h2 { margin-bottom: 48px; }
@@ -1258,7 +1451,10 @@
       <a href="#testimonios">Testimonios</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a href="#form" class="nav-cta">Agenda una sesión gratuita</a>
+    <div class="nav-actions">
+      <a href="https://wa.me/573007384060" target="_blank" rel="noopener" class="nav-cta-outline">Hablemos</a>
+      <a href="#form" class="nav-cta">Agenda gratuita</a>
+    </div>
   </div>
 </nav>
 
@@ -1635,37 +1831,104 @@
 </section>
 
 <!-- ============ STATS ============ -->
-<section class="stats-section" id="resultados">
-  <div class="container stats-grid">
-    <div class="reveal">
-      <div class="stats-label">Resultados respaldados por datos</div>
-      <h2>Resultados que superan expectativas</h2>
-      <p class="stats-copy">Con años de experiencia y más de 300 empresas transformadas, Grow Finance fue construido para que descubras el verdadero potencial financiero de tu negocio. Rompemos las creencias limitantes sobre tu dinero y te impulsamos a tomar decisiones que generan crecimiento real y sostenible.</p>
+<section class="stats-v2" id="resultados">
+  <div class="stats-v2-head reveal">
+    <span class="stats-v2-eyebrow">Resultados respaldados por datos</span>
+    <h2>Los números<br>que respaldan<br>nuestro trabajo.</h2>
+  </div>
+  <div class="stats-v2-grid">
+    <div class="stats-v2-cards">
+      <div class="stats-v2-card v-teal reveal" data-aside="0">
+        <div class="card-arrow">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-num" data-count="300" data-prefix="+">+300</div>
+          <div class="card-lbl">Empresas transformadas</div>
+        </div>
+      </div>
+      <div class="stats-v2-card v-dark reveal" data-aside="1">
+        <div class="card-arrow">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-num" data-count="30" data-suffix="%">30%</div>
+          <div class="card-lbl">Menor dependencia de financiamiento externo</div>
+        </div>
+      </div>
+      <div class="stats-v2-card v-light reveal" data-aside="2">
+        <div class="card-arrow">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-num" data-count="25" data-suffix="%">25%</div>
+          <div class="card-lbl">Mejora en eficiencia operativa</div>
+        </div>
+      </div>
+      <div class="stats-v2-card v-dark reveal" data-aside="3">
+        <div class="card-arrow">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-num" data-count="20" data-suffix="%">20%</div>
+          <div class="card-lbl">Mejores términos de pago con proveedores</div>
+        </div>
+      </div>
+      <div class="stats-v2-card v-teal reveal" data-aside="4">
+        <div class="card-arrow">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-num" data-count="15" data-suffix="%">15%</div>
+          <div class="card-lbl">Reducción de costos operativos</div>
+        </div>
+      </div>
+      <div class="stats-v2-card v-dark reveal" data-aside="5">
+        <div class="card-arrow">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-num" data-count="20" data-suffix="%">20%</div>
+          <div class="card-lbl">Más ingresos en procesos de fusión</div>
+        </div>
+      </div>
     </div>
-    <div class="stats-numbers">
-      <div class="stat-item reveal">
-        <div class="stat-value" data-count="300" data-prefix="+">+300</div>
-        <div class="stat-text">empresas han transformado sus finanzas con nosotros</div>
+    <div class="stats-v2-aside">
+      <div class="aside-block" data-index="0">
+        <h3>Más empresas, más confianza.</h3>
+        <p>Cada caso suma aprendizaje. Por eso nuestro sistema mejora con cada empresa que acompañamos.</p>
       </div>
-      <div class="stat-item reveal">
-        <div class="stat-value" data-count="30" data-suffix="%">30%</div>
-        <div class="stat-text">redujeron su dependencia de financiamiento externo</div>
+      <div class="aside-block" data-index="1">
+        <h3>Menos deuda, más autonomía.</h3>
+        <p>Reducir la dependencia de capital externo libera tu empresa para crecer con sus propios recursos.</p>
       </div>
-      <div class="stat-item reveal">
-        <div class="stat-value" data-count="25" data-suffix="%">25%</div>
-        <div class="stat-text">mejoraron su eficiencia operativa</div>
+      <div class="aside-block" data-index="2">
+        <h3>Procesos que generan margen.</h3>
+        <p>Cuando tu operación es eficiente, cada peso vendido se convierte en utilidad real, no en sobrecosto.</p>
       </div>
-      <div class="stat-item reveal">
-        <div class="stat-value" data-count="20" data-suffix="%">20%</div>
-        <div class="stat-text">optimizaron sus términos de pago con proveedores</div>
+      <div class="aside-block" data-index="3">
+        <h3>Tu flujo, bajo control.</h3>
+        <p>Renegociar plazos con proveedores libera caja sin tocar tu producto ni tu equipo.</p>
       </div>
-      <div class="stat-item reveal">
-        <div class="stat-value" data-count="15" data-suffix="%">15%</div>
-        <div class="stat-text">redujeron sus costos operativos</div>
+      <div class="aside-block" data-index="4">
+        <h3>Menos fuga, más rentabilidad.</h3>
+        <p>Identificar y eliminar costos que no aportan valor es la palanca más rápida hacia el margen.</p>
       </div>
-      <div class="stat-item reveal">
-        <div class="stat-value" data-count="20" data-suffix="%">20%</div>
-        <div class="stat-text">aumentaron ingresos en procesos de fusión</div>
+      <div class="aside-block" data-index="5">
+        <h3>Crecer comprando bien.</h3>
+        <p>Una fusión bien estructurada multiplica ingresos sin doblar la complejidad operativa.</p>
       </div>
     </div>
   </div>
@@ -2082,6 +2345,27 @@
       ticking = true;
     }
   }, { passive: true });
+
+  // ====== Stats v2: sync aside descriptions with active card ======
+  const statCards = document.querySelectorAll('.stats-v2-card');
+  const asideBlocks = document.querySelectorAll('.stats-v2-aside .aside-block');
+  if (statCards.length && asideBlocks.length) {
+    const setActive = (index) => {
+      asideBlocks.forEach(b => b.classList.remove('active'));
+      const target = asideBlocks[index];
+      if (target) target.classList.add('active');
+    };
+    const cardIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.intersectionRatio > 0.55) {
+          const idx = parseInt(e.target.dataset.aside, 10);
+          if (!isNaN(idx)) setActive(idx);
+        }
+      });
+    }, { rootMargin: '-30% 0px -30% 0px', threshold: [0.55, 0.75] });
+    statCards.forEach(c => cardIO.observe(c));
+    setActive(0);
+  }
 
   // ====== FAQ accordion ======
   document.querySelectorAll('.faq-item').forEach(item => {
