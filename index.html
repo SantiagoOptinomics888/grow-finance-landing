@@ -562,7 +562,7 @@
     font-weight: 500;
   }
 
-  /* ============ STATS V2 — Vertical Cards ============ */
+  /* ============ STATS V2 — Vertical Cards with Active Highlight ============ */
   .stats-v2 {
     padding: 140px 0;
     background: var(--white);
@@ -571,7 +571,7 @@
   }
   .stats-v2-head {
     max-width: 1280px;
-    margin: 0 auto 64px;
+    margin: 0 auto 56px;
     padding: 0 24px;
   }
   .stats-v2-eyebrow {
@@ -592,121 +592,97 @@
     border-radius: 50%;
   }
   .stats-v2 h2 {
-    font-size: clamp(48px, 6.5vw, 96px);
+    font-size: clamp(44px, 6vw, 88px);
     font-weight: 800;
-    line-height: 0.96;
+    line-height: 0.98;
     letter-spacing: -0.03em;
     text-transform: uppercase;
     color: var(--ink);
   }
-  .stats-v2-grid {
+  .stats-v2-list {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 64px;
-    align-items: flex-start;
-  }
-  .stats-v2-cards {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+  }
+  .stats-v2-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    min-height: 280px;
+    padding: 28px 0;
   }
   .stats-v2-card {
     display: grid;
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 130px 1fr;
     border-radius: var(--radius);
     overflow: hidden;
-    min-height: 220px;
-    transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1);
+    min-height: 200px;
+    transition: filter .5s ease;
   }
-  .stats-v2-card:hover { transform: translateY(-4px); }
   .stats-v2-card .card-arrow {
-    background: var(--green);
+    background: #EEF1F4;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background .5s ease;
   }
   .stats-v2-card .card-arrow::before {
     content: "";
     position: absolute; inset: 0;
     background-image: repeating-linear-gradient(
       0deg,
-      rgba(0,0,0,0.12) 0px,
-      rgba(0,0,0,0.12) 1px,
+      rgba(0,0,0,0.08) 0,
+      rgba(0,0,0,0.08) 1px,
       transparent 1px,
       transparent 6px
     );
-    opacity: .85;
+    opacity: .55;
+    transition: opacity .5s ease, background-image .5s ease;
   }
   .stats-v2-card .card-arrow svg {
     position: relative;
     z-index: 1;
-    width: 48px; height: 48px;
+    width: 56px; height: 56px;
+    color: #C5CCD3;
+    transition: color .5s ease;
   }
   .stats-v2-card .card-body {
-    background: var(--ink);
-    color: var(--white);
-    padding: 32px 36px;
+    background: transparent;
+    color: #C5CCD3;
+    padding: 28px 36px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
+    transition: background .5s ease, color .5s ease;
   }
   .stats-v2-card .card-num {
-    font-size: clamp(58px, 7vw, 96px);
+    font-size: clamp(60px, 7.5vw, 104px);
     font-weight: 800;
     line-height: 0.95;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.045em;
+    transition: color .5s ease;
   }
   .stats-v2-card .card-lbl {
     font-size: 15px;
     font-weight: 500;
-    color: rgba(255,255,255,0.7);
     line-height: 1.35;
     max-width: 360px;
+    opacity: 0;
+    transition: opacity .5s ease, color .5s ease;
   }
-  /* Color variants */
-  .stats-v2-card.v-light .card-arrow { background: #E8EEF4; }
-  .stats-v2-card.v-light .card-arrow::before {
-    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.07) 0, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 6px);
-  }
-  .stats-v2-card.v-light .card-arrow svg path,
-  .stats-v2-card.v-light .card-arrow svg polygon { fill: var(--ink); stroke: var(--ink); }
-  .stats-v2-card.v-light .card-body { background: var(--ink); }
 
-  .stats-v2-card.v-teal .card-arrow { background: var(--green); }
-  .stats-v2-card.v-teal .card-arrow svg path,
-  .stats-v2-card.v-teal .card-arrow svg polygon { fill: var(--ink); stroke: var(--ink); }
-  .stats-v2-card.v-teal .card-body { background: var(--ink); }
-
-  .stats-v2-card.v-dark .card-arrow {
-    background: #2A3B4F;
+  /* Right column: description aligned per row */
+  .aside-block {
+    transition: opacity .5s ease;
+    opacity: 0.25;
   }
-  .stats-v2-card.v-dark .card-arrow::before {
-    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 6px);
-  }
-  .stats-v2-card.v-dark .card-arrow svg path,
-  .stats-v2-card.v-dark .card-arrow svg polygon { fill: var(--green); stroke: var(--green); }
-  .stats-v2-card.v-dark .card-body { background: var(--night); }
-
-  .stats-v2-aside {
-    position: sticky;
-    top: 120px;
-    align-self: start;
-    padding-top: 20px;
-  }
-  .stats-v2-aside .aside-block {
-    margin-bottom: 240px;
-    opacity: 0.35;
-    transition: opacity .4s ease;
-  }
-  .stats-v2-aside .aside-block:last-child { margin-bottom: 0; }
-  .stats-v2-aside .aside-block.active { opacity: 1; }
-  .stats-v2-aside .aside-block h3 {
+  .aside-block h3 {
     font-size: clamp(22px, 2.2vw, 30px);
     font-weight: 700;
     line-height: 1.2;
@@ -714,12 +690,21 @@
     margin-bottom: 12px;
     color: var(--ink);
   }
-  .stats-v2-aside .aside-block p {
+  .aside-block p {
     font-size: 17px;
     color: var(--muted);
     line-height: 1.55;
     max-width: 420px;
   }
+
+  /* ACTIVE state — row highlighted */
+  .stats-v2-row.active .stats-v2-card .card-arrow { background: var(--green); }
+  .stats-v2-row.active .stats-v2-card .card-arrow::before { opacity: .9; }
+  .stats-v2-row.active .stats-v2-card .card-arrow svg { color: var(--ink); }
+  .stats-v2-row.active .stats-v2-card .card-body { background: var(--ink); color: var(--white); }
+  .stats-v2-row.active .stats-v2-card .card-num { color: var(--white); }
+  .stats-v2-row.active .stats-v2-card .card-lbl { opacity: 1; color: rgba(255,255,255,0.7); }
+  .stats-v2-row.active .aside-block { opacity: 1; }
 
   /* ============ TESTIMONIALS ============ */
   .testimonials-section { padding: 140px 0; }
@@ -1349,9 +1334,8 @@
     .nav-links { display: none; }
     .nav-cta-outline { display: none; }
     .nav-cta { padding: 10px 18px; font-size: 13px; }
-    .stats-v2-grid { grid-template-columns: 1fr; gap: 40px; }
-    .stats-v2-aside { position: static; }
-    .stats-v2-aside .aside-block { margin-bottom: 32px; opacity: 1; }
+    .stats-v2-row { grid-template-columns: 1fr; gap: 20px; min-height: auto; padding: 20px 0; }
+    .stats-v2-row .aside-block { opacity: 1; }
     .stats-v2 h2 { font-size: clamp(40px, 8vw, 64px); }
     .section, .features-section, .stats-section, .quote-section, .how-section, .testimonials-section, .faq-section, .form-section, .showcase-section, .case-section, .final-cta-section, .press { padding: 72px 0; }
     .press { padding: 32px 0 40px; }
@@ -1836,9 +1820,9 @@
     <span class="stats-v2-eyebrow">Resultados respaldados por datos</span>
     <h2>Los números<br>que respaldan<br>nuestro trabajo.</h2>
   </div>
-  <div class="stats-v2-grid">
-    <div class="stats-v2-cards">
-      <div class="stats-v2-card v-teal reveal" data-aside="0">
+  <div class="stats-v2-list">
+    <article class="stats-v2-row reveal">
+      <div class="stats-v2-card">
         <div class="card-arrow">
           <svg viewBox="0 0 48 48" aria-hidden="true">
             <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1849,7 +1833,13 @@
           <div class="card-lbl">Empresas transformadas</div>
         </div>
       </div>
-      <div class="stats-v2-card v-dark reveal" data-aside="1">
+      <div class="aside-block">
+        <h3>Más empresas, más confianza.</h3>
+        <p>Cada caso suma aprendizaje. Por eso nuestro sistema mejora con cada empresa que acompañamos.</p>
+      </div>
+    </article>
+    <article class="stats-v2-row reveal">
+      <div class="stats-v2-card">
         <div class="card-arrow">
           <svg viewBox="0 0 48 48" aria-hidden="true">
             <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1860,7 +1850,13 @@
           <div class="card-lbl">Menor dependencia de financiamiento externo</div>
         </div>
       </div>
-      <div class="stats-v2-card v-light reveal" data-aside="2">
+      <div class="aside-block">
+        <h3>Menos deuda, más autonomía.</h3>
+        <p>Reducir la dependencia de capital externo libera tu empresa para crecer con sus propios recursos.</p>
+      </div>
+    </article>
+    <article class="stats-v2-row reveal">
+      <div class="stats-v2-card">
         <div class="card-arrow">
           <svg viewBox="0 0 48 48" aria-hidden="true">
             <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1871,7 +1867,13 @@
           <div class="card-lbl">Mejora en eficiencia operativa</div>
         </div>
       </div>
-      <div class="stats-v2-card v-dark reveal" data-aside="3">
+      <div class="aside-block">
+        <h3>Procesos que generan margen.</h3>
+        <p>Cuando tu operación es eficiente, cada peso vendido se convierte en utilidad real, no en sobrecosto.</p>
+      </div>
+    </article>
+    <article class="stats-v2-row reveal">
+      <div class="stats-v2-card">
         <div class="card-arrow">
           <svg viewBox="0 0 48 48" aria-hidden="true">
             <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1882,7 +1884,13 @@
           <div class="card-lbl">Mejores términos de pago con proveedores</div>
         </div>
       </div>
-      <div class="stats-v2-card v-teal reveal" data-aside="4">
+      <div class="aside-block">
+        <h3>Tu flujo, bajo control.</h3>
+        <p>Renegociar plazos con proveedores libera caja sin tocar tu producto ni tu equipo.</p>
+      </div>
+    </article>
+    <article class="stats-v2-row reveal">
+      <div class="stats-v2-card">
         <div class="card-arrow">
           <svg viewBox="0 0 48 48" aria-hidden="true">
             <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1893,7 +1901,13 @@
           <div class="card-lbl">Reducción de costos operativos</div>
         </div>
       </div>
-      <div class="stats-v2-card v-dark reveal" data-aside="5">
+      <div class="aside-block">
+        <h3>Menos fuga, más rentabilidad.</h3>
+        <p>Identificar y eliminar costos que no aportan valor es la palanca más rápida hacia el margen.</p>
+      </div>
+    </article>
+    <article class="stats-v2-row reveal">
+      <div class="stats-v2-card">
         <div class="card-arrow">
           <svg viewBox="0 0 48 48" aria-hidden="true">
             <path d="M24 6 L24 42 M10 20 L24 6 L38 20" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1904,33 +1918,11 @@
           <div class="card-lbl">Más ingresos en procesos de fusión</div>
         </div>
       </div>
-    </div>
-    <div class="stats-v2-aside">
-      <div class="aside-block" data-index="0">
-        <h3>Más empresas, más confianza.</h3>
-        <p>Cada caso suma aprendizaje. Por eso nuestro sistema mejora con cada empresa que acompañamos.</p>
-      </div>
-      <div class="aside-block" data-index="1">
-        <h3>Menos deuda, más autonomía.</h3>
-        <p>Reducir la dependencia de capital externo libera tu empresa para crecer con sus propios recursos.</p>
-      </div>
-      <div class="aside-block" data-index="2">
-        <h3>Procesos que generan margen.</h3>
-        <p>Cuando tu operación es eficiente, cada peso vendido se convierte en utilidad real, no en sobrecosto.</p>
-      </div>
-      <div class="aside-block" data-index="3">
-        <h3>Tu flujo, bajo control.</h3>
-        <p>Renegociar plazos con proveedores libera caja sin tocar tu producto ni tu equipo.</p>
-      </div>
-      <div class="aside-block" data-index="4">
-        <h3>Menos fuga, más rentabilidad.</h3>
-        <p>Identificar y eliminar costos que no aportan valor es la palanca más rápida hacia el margen.</p>
-      </div>
-      <div class="aside-block" data-index="5">
+      <div class="aside-block">
         <h3>Crecer comprando bien.</h3>
         <p>Una fusión bien estructurada multiplica ingresos sin doblar la complejidad operativa.</p>
       </div>
-    </div>
+    </article>
   </div>
 </section>
 
@@ -2346,25 +2338,32 @@
     }
   }, { passive: true });
 
-  // ====== Stats v2: sync aside descriptions with active card ======
-  const statCards = document.querySelectorAll('.stats-v2-card');
-  const asideBlocks = document.querySelectorAll('.stats-v2-aside .aside-block');
-  if (statCards.length && asideBlocks.length) {
-    const setActive = (index) => {
-      asideBlocks.forEach(b => b.classList.remove('active'));
-      const target = asideBlocks[index];
-      if (target) target.classList.add('active');
-    };
-    const cardIO = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting && e.intersectionRatio > 0.55) {
-          const idx = parseInt(e.target.dataset.aside, 10);
-          if (!isNaN(idx)) setActive(idx);
+  // ====== Stats v2: highlight the row most centered in the viewport ======
+  const statRows = document.querySelectorAll('.stats-v2-row');
+  if (statRows.length) {
+    const setActiveRow = () => {
+      const vpCenter = window.innerHeight / 2;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+      statRows.forEach((row, i) => {
+        const rect = row.getBoundingClientRect();
+        const rowCenter = rect.top + rect.height / 2;
+        const dist = Math.abs(rowCenter - vpCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIdx = i;
         }
       });
-    }, { rootMargin: '-30% 0px -30% 0px', threshold: [0.55, 0.75] });
-    statCards.forEach(c => cardIO.observe(c));
-    setActive(0);
+      statRows.forEach((r, i) => r.classList.toggle('active', i === bestIdx));
+    };
+    let rowTick = false;
+    document.addEventListener('scroll', () => {
+      if (!rowTick) {
+        requestAnimationFrame(() => { setActiveRow(); rowTick = false; });
+        rowTick = true;
+      }
+    }, { passive: true });
+    setActiveRow();
   }
 
   // ====== FAQ accordion ======
