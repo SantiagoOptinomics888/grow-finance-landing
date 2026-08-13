@@ -1,5 +1,19 @@
+<?php
+/**
+ * Portada: landing de conversión de Grow Finance.
+ *
+ * El CSS y el JS van embebidos a propósito: son exclusivos de esta página
+ * y así se evita una petición extra en la vista más visitada del sitio.
+ *
+ * @package grow
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <!DOCTYPE html>
-<html lang="es-CO">
+<html <?php language_attributes(); ?>>
 <head>
 <meta charset="UTF-8" />
 <!-- Google Tag Manager (mismo contenedor del sitio anterior) -->
@@ -10,30 +24,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MWJHGNGC');</script>
 <!-- End Google Tag Manager -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Grow Finance — Dirección Financiera Estratégica para empresas en crecimiento</title>
 <meta name="description" content="Transforma las finanzas de tu empresa con dirección financiera estratégica. Más de 300 empresas ya optimizaron su flujo de caja con Grow Finance. Agenda una sesión gratuita." />
 <meta name="keywords" content="dirección financiera, CFO, consultoría financiera, flujo de caja, Colombia, Grow Finance" />
 
-<link rel="canonical" href="https://www.growfinance.co/" />
-<meta name="robots" content="index, follow, max-image-preview:large" />
 
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.growfinance.co/" />
-<meta property="og:site_name" content="Grow Finance" />
-<meta property="og:title" content="Grow Finance — Dirección Financiera Estratégica" />
-<meta property="og:description" content="Más de 300 empresas han optimizado su flujo de caja con nosotros. Agenda una sesión gratuita de 30 minutos." />
-<meta property="og:locale" content="es_CO" />
-<meta property="og:image" content="https://www.growfinance.co/images/og-grow.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Grow Finance — Dirección financiera estratégica" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Grow Finance — Dirección Financiera Estratégica" />
-<meta name="twitter:description" content="Más de 300 empresas han optimizado su flujo de caja con nosotros. Agenda una sesión gratuita de 30 minutos." />
-<meta name="twitter:image" content="https://www.growfinance.co/images/og-grow.jpg" />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231B2837'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='52' fill='%235DD3A8' letter-spacing='-2'%3EG%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1612,12 +1608,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .nav-cta { display: none; }
   }
 </style>
+<?php wp_head(); ?>
 </head>
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWJHGNGC"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
 <!-- ============ NAV ============ -->
 <nav class="nav" id="nav">
@@ -1631,7 +1625,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#resultados">Resultados</a>
       <a href="#testimonios">Testimonios</a>
       <a href="#faq">FAQ</a>
-      <a href="/blog/">Blog</a>
+      <a href="<?php echo esc_url( grow_blog_url() ); ?>">Blog</a>
     </div>
     <div class="nav-actions">
       <a href="https://wa.me/573007384060" target="_blank" rel="noopener" class="nav-cta-outline">Hablemos</a>
@@ -1658,7 +1652,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="hero-visual reveal" aria-label="Grow Finance - Dirección financiera estratégica">
-      <img class="hero-photo" src="images/hero-grow.jpg" width="1200" height="1500" alt="Director financiero de Grow Finance" loading="eager" fetchpriority="high"/>
+      <img class="hero-photo" src="<?php echo esc_url( grow_asset( 'img/hero-grow.jpg' ) ); ?>" width="1200" height="1500" alt="Director financiero de Grow Finance" loading="eager" fetchpriority="high"/>
       <div class="hero-photo-overlay"></div>
     </div>
   </div>
@@ -1692,7 +1686,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="split-caption">Grow Finance fue construido para empresarios que no se conforman: equipos de dirección, líderes de pyme y fundadores que quieren convertir las finanzas en su mayor palanca de crecimiento.</p>
     </div>
     <div class="split-visual reveal">
-      <img class="split-photo" src="images/equipo-grow.jpg" width="1400" height="933" alt="Equipo de Grow Finance conversando durante una sesión de trabajo" loading="lazy" decoding="async"/>
+      <img class="split-photo" src="<?php echo esc_url( grow_asset( 'img/equipo-grow.jpg' ) ); ?>" width="1400" height="933" alt="Equipo de Grow Finance conversando durante una sesión de trabajo" loading="lazy" decoding="async"/>
     </div>
   </div>
 </section>
@@ -2446,7 +2440,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h4>Recursos</h4>
       <a href="#faq">Preguntas frecuentes</a>
       <a href="#form">Agenda gratuita</a>
-      <a href="/blog/">Blog</a>
+      <a href="<?php echo esc_url( grow_blog_url() ); ?>">Blog</a>
       <a href="#resultados">Casos de éxito</a>
     </div>
     <div>
@@ -2588,11 +2582,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   /* Campo del formulario -> nombre interno de la propiedad en HubSpot.
      Solo pueden ir campos que existan en el formulario de HubSpot: la API
-     rechaza el envio completo si recibe uno que no este definido alli.
+     rechaza el envío completo si recibe uno que no esté definido allí.
 
-     'country' esta fuera a proposito porque el formulario de HubSpot no lo
-     tiene. Para capturarlo: anade la propiedad al formulario en HubSpot y
-     descomenta la linea correspondiente. */
+     'country' está fuera a propósito porque el formulario de HubSpot no lo
+     tiene. Para capturarlo: añade la propiedad al formulario en HubSpot y
+     descomenta la línea correspondiente. */
   const FIELD_MAP = {
     firstName: 'firstname',
     lastName: 'lastname',
@@ -2747,5 +2741,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   })();
 </script>
 
+<?php wp_footer(); ?>
 </body>
 </html>

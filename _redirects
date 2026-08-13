@@ -1,0 +1,38 @@
+# Redirecciones del sitio WordPress anterior
+# Formato: origen  destino  codigo
+
+/como-mejorar-el-flujo-de-caja-de-mi-empresa/*  /blog/como-mejorar-el-flujo-de-caja-de-mi-empresa/  301!
+/como-mejorar-el-flujo-de-caja-de-mi-empresa   /blog/como-mejorar-el-flujo-de-caja-de-mi-empresa/  301!
+/gestion-financiera-pymes/*  /blog/gestion-financiera-pymes/  301!
+/gestion-financiera-pymes   /blog/gestion-financiera-pymes/  301!
+/que-sucede-cuando-los-costos-del-producto-comienzan-a-elevarse-afectando-los-margenes-de-ganancia-y-poniendo-en-riesgo-tu-viabilidad-economica/*  /blog/que-sucede-cuando-los-costos-del-producto-comienzan-a-elevarse-afectando-los-margenes-de-ganancia-y-poniendo-en-riesgo-tu-viabilidad-economica/  301!
+/que-sucede-cuando-los-costos-del-producto-comienzan-a-elevarse-afectando-los-margenes-de-ganancia-y-poniendo-en-riesgo-tu-viabilidad-economica   /blog/que-sucede-cuando-los-costos-del-producto-comienzan-a-elevarse-afectando-los-margenes-de-ganancia-y-poniendo-en-riesgo-tu-viabilidad-economica/  301!
+/la-asesoria-financiera-para-empresas-una-alternativa-clave-para-navegar-en-tiempos-de-incertidumbre-economica/*  /blog/la-asesoria-financiera-para-empresas-una-alternativa-clave-para-navegar-en-tiempos-de-incertidumbre-economica/  301!
+/la-asesoria-financiera-para-empresas-una-alternativa-clave-para-navegar-en-tiempos-de-incertidumbre-economica   /blog/la-asesoria-financiera-para-empresas-una-alternativa-clave-para-navegar-en-tiempos-de-incertidumbre-economica/  301!
+/analisis-financiero-integral/*  /blog/analisis-financiero-integral/  301!
+/analisis-financiero-integral   /blog/analisis-financiero-integral/  301!
+/que-es-mejor-comprar-vivienda-o-arrendar/*  /blog/que-es-mejor-comprar-vivienda-o-arrendar/  301!
+/que-es-mejor-comprar-vivienda-o-arrendar   /blog/que-es-mejor-comprar-vivienda-o-arrendar/  301!
+/ahorro/*  /blog/ahorro/  301!
+/ahorro   /blog/ahorro/  301!
+/salud-financiera/*  /blog/salud-financiera/  301!
+/salud-financiera   /blog/salud-financiera/  301!
+/potencia-tu-pyme/*  /blog/potencia-tu-pyme/  301!
+/potencia-tu-pyme   /blog/potencia-tu-pyme/  301!
+/creditos-en-colombia/*  /blog/creditos-en-colombia/  301!
+/creditos-en-colombia   /blog/creditos-en-colombia/  301!
+/oportunidades-de-inversion/*  /blog/oportunidades-de-inversion/  301!
+/oportunidades-de-inversion   /blog/oportunidades-de-inversion/  301!
+
+/blogs/*      /blog/       301!
+/servicios/*  /#beneficios 301!
+/nosotros/*   /#beneficios 301!
+/contacto/*   /#form       301!
+/kategorie/*  /            301!
+/elementor-1667/* /        301!
+/wp-admin/*   /            301!
+/wp-content/* /            301!
+/wp-json/*    /            301!
+
+# Cualquier otra URL antigua
+/*            /            301

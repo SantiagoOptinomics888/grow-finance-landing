@@ -1,0 +1,28 @@
+# Credenciales — nunca deben llegar al repositorio
+.env
+.env.*
+*.env
+credentials*
+secrets*
+*.key
+*.pem
+.ftp-config
+deploy-config*
+
+# Respaldos del sitio anterior
+backup/
+wp-backup/
+*.sql
+*.sql.gz
+*.zip
+*.tar.gz
+
+# Sistema
+.DS_Store
+Thumbs.db
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+venv/
