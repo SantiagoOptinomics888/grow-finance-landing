@@ -24,8 +24,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MWJHGNGC');</script>
 <!-- End Google Tag Manager -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Transforma las finanzas de tu empresa con dirección financiera estratégica. Más de 300 empresas ya optimizaron su flujo de caja con Grow Finance. Agenda una sesión gratuita." />
-<meta name="keywords" content="dirección financiera, CFO, consultoría financiera, flujo de caja, Colombia, Grow Finance" />
 
 
 
@@ -934,6 +932,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow: hidden;
   }
   .showcase-visual svg { width: 100%; height: 100%; }
+  .showcase-visual img.showcase-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Tarjeta que ademas es enlace: hereda color y gana afordancia propia. */
+  a.showcase-card--link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .showcase-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-deep);
+  }
+  .showcase-cta svg {
+    width: 17px;
+    height: 17px;
+    transition: transform .25s ease;
+  }
+  .showcase-card--link:hover .showcase-cta svg { transform: translateX(4px); }
+  .showcase-card--link:focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-cta svg { transition: none; }
+    .showcase-card--link:hover .showcase-cta svg { transform: none; }
+  }
   .showcase-body {
     padding: 28px 28px 32px;
   }
@@ -1414,46 +1447,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .footer-bottom { flex-direction: column; text-align: center; }
   }
 
-  /* ============ REVEAL ANIMATIONS ============ */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity .8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform .8s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* ============ MOVIMIENTO LIGADO AL SCROLL ============
+     El desplazamiento y la opacidad los calcula el JS en cada fotograma
+     segun donde este el elemento, en vez de una transicion de duracion
+     fija. Por eso los elementos siguen moviendose mientras se hace
+     scroll, en lugar de encajar de golpe y quedarse quietos.
 
-  /* Stagger children inside grids */
-  .features-grid > .reveal:nth-child(1),
-  .showcase-grid > .reveal:nth-child(1),
-  .testimonials-grid > .reveal:nth-child(1),
-  .stats-numbers > .reveal:nth-child(1) { transition-delay: 0ms; }
-  .features-grid > .reveal:nth-child(2),
-  .showcase-grid > .reveal:nth-child(2),
-  .testimonials-grid > .reveal:nth-child(2),
-  .stats-numbers > .reveal:nth-child(2) { transition-delay: 100ms; }
-  .features-grid > .reveal:nth-child(3),
-  .showcase-grid > .reveal:nth-child(3),
-  .testimonials-grid > .reveal:nth-child(3),
-  .stats-numbers > .reveal:nth-child(3) { transition-delay: 200ms; }
-  .features-grid > .reveal:nth-child(4),
-  .testimonials-grid > .reveal:nth-child(4),
-  .stats-numbers > .reveal:nth-child(4) { transition-delay: 300ms; }
-  .features-grid > .reveal:nth-child(5),
-  .stats-numbers > .reveal:nth-child(5) { transition-delay: 400ms; }
-  .features-grid > .reveal:nth-child(6),
-  .stats-numbers > .reveal:nth-child(6) { transition-delay: 500ms; }
+     El estado inicial oculto se aplica solo si el JS arranco (clase
+     "motion" en <html>). Sin JS, la pagina se ve entera. */
+  html.motion .reveal { opacity: 0; }
+  html.motion .reveal-scale { opacity: 0; }
+  .reveal, .reveal-scale { will-change: transform, opacity; }
 
-  /* Hero subtitle/CTA staggered */
-  .hero h1.reveal { transition-delay: 60ms; }
-  .hero .subtitle.reveal { transition-delay: 140ms; }
-  .hero .btn-cta.reveal { transition-delay: 220ms; }
-  .hero .hero-trust.reveal { transition-delay: 300ms; }
-  .hero .hero-visual.reveal { transition-delay: 200ms; transition-duration: 1.1s; }
+  /* Las imagenes con parallax se amplian un poco para que al
+     desplazarse dentro de su marco no asomen los bordes. */
+  html.motion .hero-photo,
+  html.motion .split-photo { transform: scale(1.07); }
 
   /* Scale-in variant for big metrics */
   .reveal-scale {
@@ -1658,21 +1667,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </section>
 
-<!-- ============ PRESS / CLIENTES ============ -->
-<section class="press">
-  <div class="container">
-    <div class="press-row reveal">
-      <span>Reserva El Encanto</span>
-      <span>Crecer Consultoría</span>
-      <span>PC Mejía</span>
-      <span>DH Visuals</span>
-      <span>Good Taste Academy</span>
-      <span>SIAV</span>
-      <span>Convergencia</span>
-      <span>Claudia Ramírez</span>
-    </div>
-  </div>
-</section>
+<!-- Franja de nombres de clientes retirada a peticion del cliente.
+     Los estilos (.press, .press-row) siguen en el CSS de esta pagina,
+     asi que para restaurarla basta con volver a insertar el marcado. -->
 
 <!-- ============ NO COMPITAS SIN DIRECTOR ============ -->
 <section class="section" id="beneficios">
@@ -1861,24 +1858,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="showcase-grid">
       <div class="showcase-card reveal">
         <div class="showcase-visual">
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
-            <rect x="0" y="0" width="400" height="250" fill="transparent"/>
-            <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
-              <line x1="30" y1="60" x2="370" y2="60"/>
-              <line x1="30" y1="110" x2="370" y2="110"/>
-              <line x1="30" y1="160" x2="370" y2="160"/>
-              <line x1="30" y1="210" x2="370" y2="210"/>
-            </g>
-            <text x="30" y="40" font-family="Inter,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">INGRESOS · 2026</text>
-            <path d="M30 200 Q80 180 110 165 T180 130 T260 95 T350 60" stroke="#5DD3A8" stroke-width="2.5" fill="none"/>
-            <path d="M30 200 Q80 180 110 165 T180 130 T260 95 T350 60 L350 230 L30 230 Z" fill="rgba(93,211,168,0.12)"/>
-            <circle cx="350" cy="60" r="5" fill="#5DD3A8" stroke="#fff" stroke-width="2"/>
-            <g transform="translate(220, 165)">
-              <rect width="130" height="55" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
-              <text x="12" y="22" font-family="Inter,sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" letter-spacing="1.2">MARGEN OP.</text>
-              <text x="12" y="44" font-family="Inter,sans-serif" font-size="18" font-weight="800" fill="#fff">28.4%</text>
-            </g>
-          </svg>
+          <img class="showcase-photo" src="<?php echo esc_url( grow_asset( 'img/dashboard.jpg' ) ); ?>" width="1200" height="750" alt="Panel financiero de NAIA con ingresos, egresos, utilidad y flujo de caja del mes" loading="lazy" decoding="async"/>
         </div>
         <div class="showcase-body">
           <span class="tag">Entregable 01</span>
@@ -1888,33 +1868,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
       <div class="showcase-card reveal">
         <div class="showcase-visual">
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
-            <g transform="translate(40, 30)">
-              <text font-family="Inter,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">PLAN ESTRATÉGICO · Q1—Q4</text>
-            </g>
-            <g transform="translate(40, 60)">
-              <rect width="320" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-              <circle cx="20" cy="18" r="7" fill="rgba(93,211,168,0.2)" stroke="#5DD3A8" stroke-width="1.5"/>
-              <path d="M16 18 L19 21 L24 14" stroke="#5DD3A8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="40" y="22" font-family="Inter,sans-serif" font-size="12" fill="#fff" font-weight="500">Optimizar flujo de caja</text>
-            </g>
-            <g transform="translate(40, 108)">
-              <rect width="320" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-              <circle cx="20" cy="18" r="7" fill="rgba(93,211,168,0.2)" stroke="#5DD3A8" stroke-width="1.5"/>
-              <path d="M16 18 L19 21 L24 14" stroke="#5DD3A8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="40" y="22" font-family="Inter,sans-serif" font-size="12" fill="#fff" font-weight="500">Renegociar términos proveedores</text>
-            </g>
-            <g transform="translate(40, 156)">
-              <rect width="320" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-              <circle cx="20" cy="18" r="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-              <text x="40" y="22" font-family="Inter,sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" font-weight="500">Estructurar línea de crédito</text>
-            </g>
-            <g transform="translate(40, 204)">
-              <rect width="320" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-              <circle cx="20" cy="18" r="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-              <text x="40" y="22" font-family="Inter,sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" font-weight="500">Preparar plan de expansión</text>
-            </g>
-          </svg>
+          <img class="showcase-photo" src="<?php echo esc_url( grow_asset( 'img/plan.jpg' ) ); ?>" width="1200" height="750" alt="Detalle del logotipo de Grow bordado en la camisa del equipo" loading="lazy" decoding="async"/>
         </div>
         <div class="showcase-body">
           <span class="tag">Entregable 02</span>
@@ -1922,48 +1876,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <p>Hoja de ruta clara con prioridades trimestrales, responsables y métricas de éxito. Tu equipo sabe qué mover y en qué orden.</p>
         </div>
       </div>
-      <div class="showcase-card reveal">
+      <a class="showcase-card showcase-card--link reveal" href="https://www.naiafinance.com/" target="_blank" rel="noopener">
         <div class="showcase-visual">
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
-            <!-- WhatsApp-style header -->
-            <g transform="translate(20, 20)">
-              <rect width="360" height="44" rx="10" fill="rgba(37,211,102,0.12)" stroke="rgba(37,211,102,0.3)"/>
-              <circle cx="26" cy="22" r="14" fill="#25D366"/>
-              <text x="26" y="27" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="800" fill="#0A0A0A">N</text>
-              <text x="50" y="20" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#fff">NAIA</text>
-              <circle cx="55" cy="32" r="3" fill="#25D366"/>
-              <text x="64" y="35" font-family="Inter,sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">en línea</text>
-              <text x="345" y="27" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">11:24</text>
-            </g>
-
-            <!-- User message (right) -->
-            <g transform="translate(180, 80)">
-              <rect width="200" height="32" rx="14" fill="rgba(93,211,168,0.18)"/>
-              <text x="16" y="20" font-family="Inter,sans-serif" font-size="12" fill="#fff">¿Cómo va mi flujo este mes?</text>
-            </g>
-
-            <!-- NAIA reply card -->
-            <g transform="translate(20, 124)">
-              <rect width="240" height="100" rx="14" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
-              <text x="16" y="22" font-family="Inter,sans-serif" font-size="10" fill="rgba(255,255,255,0.5)" letter-spacing="1.2">FLUJO DE CAJA · MAYO</text>
-              <text x="16" y="50" font-family="Inter,sans-serif" font-size="22" font-weight="800" fill="#fff">$48.2M</text>
-              <text x="110" y="50" font-family="Inter,sans-serif" font-size="11" fill="#5DD3A8" font-weight="700">↑ +18%</text>
-              <path d="M16 80 L48 72 L78 76 L108 64 L138 58 L168 46 L210 38" stroke="#5DD3A8" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <circle cx="210" cy="38" r="3.5" fill="#5DD3A8"/>
-            </g>
-
-            <!-- Quick action chip -->
-            <g transform="translate(20, 232)">
-              <rect width="148" height="0" rx="11" fill="none"/>
-            </g>
-          </svg>
+          <img class="showcase-photo" src="<?php echo esc_url( grow_asset( 'img/naia.jpg' ) ); ?>" width="1200" height="750" alt="NAIA, el asistente financiero de Grow Finance en WhatsApp" loading="lazy" decoding="async"/>
         </div>
         <div class="showcase-body">
           <span class="tag">Entregable 03</span>
           <h3>NAIA: tu asistente financiero por WhatsApp</h3>
           <p>Consulta tu flujo de caja en segundos, registra ingresos y gastos por chat, y recibe alertas y recomendaciones inteligentes. Tus finanzas en tiempo real, sin Excel ni procesos manuales.</p>
+          <span class="showcase-cta">Conocer NAIA<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -2462,25 +2385,164 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </footer>
 
 <script>
-  // ====== Nav scroll state ======
-  const nav = document.getElementById('nav');
-  const onScroll = () => {
-    if (window.scrollY > 30) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  };
-  document.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  /* ============ MOTOR DE MOVIMIENTO ============
+     Un unico bucle de requestAnimationFrame gobierna el estado del menu,
+     los revelados ligados al scroll y el parallax de las imagenes.
+     Antes habia tres escuchas de scroll independientes compitiendo.
 
-  // ====== Reveal on scroll ======
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
+     La clave del efecto: la posicion y la opacidad se recalculan en cada
+     fotograma segun donde este el elemento respecto a la ventana, en vez
+     de dispararse una transicion de duracion fija. El movimiento acompana
+     al scroll en lugar de ejecutarse al margen de el.
+  */
+  (() => {
+    const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const raiz = document.documentElement;
+    const nav = document.getElementById('nav');
+
+    // Umbrales expresados como fraccion del alto de la ventana.
+    const ENTRA = 0.94;   // empieza a aparecer cuando su borde superior llega aqui
+    const LLENO = 0.18;   // termina de aparecer aqui (recorrido largo: sigue
+                          // moviendose mientras cruza la ventana, que es lo que
+                          // da sensacion de vida en vez de encajar de golpe)
+    const SUBIDA = 56;    // px que recorre hacia arriba
+    const ESCALA = 0.90;  // escala inicial de los numeros grandes
+    const DESFASE = 0.09; // retraso entre hermanos de una misma rejilla
+    const PARALLAX = 26;  // px de recorrido de las imagenes grandes
+
+    const suave = t => 1 - Math.pow(1 - t, 3);
+    const limitar = (v, min, max) => (v < min ? min : v > max ? max : v);
+
+    let piezas = [];
+    let imagenes = [];
+    let filas = [];
+    let pendiente = false;
+
+    /** Indice de un elemento entre sus hermanos animados, para escalonarlos. */
+    const indiceEntreHermanos = (el) => {
+      if (!el.parentElement) return 0;
+      const hermanos = [...el.parentElement.children].filter(
+        n => n.classList.contains('reveal') || n.classList.contains('reveal-scale')
+      );
+      return Math.max(0, hermanos.indexOf(el));
+    };
+
+    /** Mide posiciones una sola vez para no forzar recalculo de estilos en cada fotograma. */
+    const medir = () => {
+      const y = window.scrollY;
+      piezas = [...document.querySelectorAll('.reveal, .reveal-scale')].map(el => ({
+        el,
+        escala: el.classList.contains('reveal-scale'),
+        arriba: el.getBoundingClientRect().top + y,
+        desfase: indiceEntreHermanos(el) * DESFASE,
+        avance: 0,
+      }));
+      imagenes = [...document.querySelectorAll('.hero-photo, .split-photo')].map(el => ({
+        el,
+        arriba: el.getBoundingClientRect().top + y,
+        alto: el.offsetHeight || 1,
+      }));
+      filas = [...document.querySelectorAll('.stats-v2-row')];
+    };
+
+    const pintar = () => {
+      pendiente = false;
+      const y = window.scrollY;
+      const alto = window.innerHeight;
+
+      if (nav) nav.classList.toggle('scrolled', y > 30);
+
+      // Al llegar al final del documento ya no queda scroll para que los
+      // ultimos elementos completen su recorrido. Se rematan ahi mismo para
+      // que nunca quede contenido invisible, sobre todo en pantallas cortas.
+      const enElFondo = raiz.scrollHeight - (y + alto) < 4;
+
+      // --- Revelados ---
+      for (const p of piezas) {
+        const superior = p.arriba - y;                    // posicion en la ventana
+        // Se resta: cuanto mayor el indice, mas tarde arranca. Sumando,
+        // el orden salia invertido y la ultima tarjeta entraba primero.
+        const desde = alto * (ENTRA - p.desfase);
+        const hasta = alto * LLENO;
+        const bruto = enElFondo
+          ? 1
+          : limitar((desde - superior) / Math.max(1, desde - hasta), 0, 1);
+        // Nunca retrocede: al volver hacia arriba el contenido no se desvanece.
+        if (bruto <= p.avance) continue;
+        p.avance = bruto;
+        const t = suave(bruto);
+        p.el.style.opacity = t;
+        p.el.style.transform = p.escala
+          ? `scale(${ESCALA + (1 - ESCALA) * t})`
+          : `translate3d(0, ${(1 - t) * SUBIDA}px, 0)`;
+        if (bruto >= 1) {
+          p.el.classList.add('in');
+          p.el.style.willChange = 'auto';
+        }
       }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-  document.querySelectorAll('.reveal, .reveal-scale').forEach(el => io.observe(el));
+
+      // --- Parallax de las imagenes grandes ---
+      for (const img of imagenes) {
+        const centro = (img.arriba - y) + img.alto / 2;
+        const avance = limitar((centro - alto * -0.2) / (alto * 1.4), 0, 1);
+        const recorrido = (0.5 - avance) * PARALLAX * 2;
+        img.el.style.transform = `scale(1.07) translate3d(0, ${recorrido.toFixed(2)}px, 0)`;
+      }
+
+      // --- Fila de datos mas centrada en la ventana ---
+      if (filas.length) {
+        let mejor = 0, minima = Infinity;
+        filas.forEach((fila, i) => {
+          const r = fila.getBoundingClientRect();
+          const d = Math.abs(r.top + r.height / 2 - alto / 2);
+          if (d < minima) { minima = d; mejor = i; }
+        });
+        filas.forEach((fila, i) => fila.classList.toggle('active', i === mejor));
+      }
+    };
+
+    const alHacerScroll = () => {
+      if (!pendiente) { pendiente = true; requestAnimationFrame(pintar); }
+    };
+
+    /** Deja todo visible y quieto: sin JS util para quien pide menos movimiento. */
+    const desactivar = () => {
+      raiz.classList.remove('motion');
+      document.querySelectorAll('.reveal, .reveal-scale').forEach(el => {
+        el.style.opacity = '';
+        el.style.transform = '';
+        el.classList.add('in');
+      });
+      document.querySelectorAll('.hero-photo, .split-photo').forEach(el => { el.style.transform = ''; });
+      document.removeEventListener('scroll', alHacerScroll);
+    };
+
+    const activar = () => {
+      raiz.classList.add('motion');
+      medir();
+      pintar();
+      document.addEventListener('scroll', alHacerScroll, { passive: true });
+    };
+
+    if (menosMovimiento.matches) {
+      desactivar();
+    } else {
+      activar();
+    }
+    menosMovimiento.addEventListener('change', e => (e.matches ? desactivar() : activar()));
+
+    let remedir;
+    window.addEventListener('resize', () => {
+      clearTimeout(remedir);
+      remedir = setTimeout(() => { if (raiz.classList.contains('motion')) { medir(); pintar(); } }, 160);
+    }, { passive: true });
+
+    // Las fuentes web cambian alturas al cargar: hay que volver a medir.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { if (raiz.classList.contains('motion')) { medir(); pintar(); } });
+    }
+    window.addEventListener('load', () => { if (raiz.classList.contains('motion')) { medir(); pintar(); } });
+  })();
 
   // ====== Animated counters ======
   const easeOutQuart = t => 1 - Math.pow(1 - t, 4);
@@ -2509,55 +2571,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }, { threshold: 0.4 });
   document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
 
-  // ====== Subtle parallax on hero visual ======
-  const heroVisual = document.querySelector('.hero-visual');
-  const hero = document.querySelector('.hero');
-  let ticking = false;
-  const updateParallax = () => {
-    if (!heroVisual || !hero) return;
-    const rect = hero.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) {
-      ticking = false; return;
-    }
-    const progress = -rect.top / rect.height;
-    const offset = Math.max(-30, Math.min(30, progress * 40));
-    heroVisual.style.transform = `translateY(${offset}px)`;
-    ticking = false;
-  };
-  document.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // ====== Stats v2: highlight the row most centered in the viewport ======
-  const statRows = document.querySelectorAll('.stats-v2-row');
-  if (statRows.length) {
-    const setActiveRow = () => {
-      const vpCenter = window.innerHeight / 2;
-      let bestIdx = 0;
-      let bestDist = Infinity;
-      statRows.forEach((row, i) => {
-        const rect = row.getBoundingClientRect();
-        const rowCenter = rect.top + rect.height / 2;
-        const dist = Math.abs(rowCenter - vpCenter);
-        if (dist < bestDist) {
-          bestDist = dist;
-          bestIdx = i;
-        }
-      });
-      statRows.forEach((r, i) => r.classList.toggle('active', i === bestIdx));
-    };
-    let rowTick = false;
-    document.addEventListener('scroll', () => {
-      if (!rowTick) {
-        requestAnimationFrame(() => { setActiveRow(); rowTick = false; });
-        rowTick = true;
-      }
-    }, { passive: true });
-    setActiveRow();
-  }
+  /* El parallax del hero y el resaltado de la fila de datos los gobierna
+     ahora el motor de movimiento de arriba, en un unico bucle. */
 
   // ====== FAQ accordion ======
   document.querySelectorAll('.faq-item').forEach(item => {

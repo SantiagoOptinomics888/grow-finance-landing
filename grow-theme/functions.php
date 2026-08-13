@@ -177,6 +177,115 @@ function grow_open_graph() {
 add_action( 'wp_head', 'grow_open_graph', 5 );
 
 /**
+ * Resumen de la página actual, reutilizado por la meta descripción y por
+ * Open Graph.
+ *
+ * @param int $limite Longitud máxima.
+ * @return string
+ */
+function grow_descripcion( $limite = 155 ) {
+	if ( is_front_page() && ! is_home() ) {
+		return 'Transforma las finanzas de tu empresa con dirección financiera estratégica. Más de 300 empresas ya optimizaron su flujo de caja con Grow Finance.';
+	}
+
+	if ( is_home() ) {
+		return 'Artículos sobre flujo de caja, gestión financiera y crecimiento empresarial, escritos por el equipo de Grow Finance.';
+	}
+
+	if ( is_singular() ) {
+		$texto = wp_strip_all_tags( get_the_excerpt() );
+		if ( '' === trim( $texto ) ) {
+			$texto = wp_strip_all_tags( get_post_field( 'post_content', get_the_ID() ) );
+		}
+		$texto = trim( preg_replace( '/\s+/u', ' ', $texto ) );
+		if ( mb_strlen( $texto ) > $limite ) {
+			$texto = mb_substr( $texto, 0, $limite );
+			$texto = mb_substr( $texto, 0, max( 1, (int) mb_strrpos( $texto, ' ' ) ) ) . '…';
+		}
+		return $texto;
+	}
+
+	return (string) get_bloginfo( 'description' );
+}
+
+/**
+ * Meta descripción y enlace canónico.
+ *
+ * WordPress no genera meta descripción por sí solo, y sin un plugin de SEO
+ * las entradas y el listado del blog salían sin ella.
+ */
+function grow_meta_basicos() {
+	$desc = grow_descripcion();
+	if ( '' !== $desc ) {
+		printf( '<meta name="description" content="%s" />' . "\n", esc_attr( $desc ) );
+	}
+
+	// El canónico del listado de entradas no lo cubre WordPress.
+	if ( is_home() && ! is_front_page() ) {
+		printf(
+			'<link rel="canonical" href="%s" />' . "\n",
+			esc_url( grow_blog_url() )
+		);
+	}
+}
+add_action( 'wp_head', 'grow_meta_basicos', 4 );
+
+/**
+ * Datos estructurados en formato JSON-LD.
+ *
+ * Permiten a los buscadores entender qué es cada página. En las entradas se
+ * declara el artículo; en la portada, la organización.
+ */
+function grow_datos_estructurados() {
+	$logo = grow_asset( 'img/og-grow.jpg' );
+
+	if ( is_singular( 'post' ) ) {
+		$imagen = has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'large' ) : $logo;
+		$datos  = array(
+			'@context'         => 'https://schema.org',
+			'@type'            => 'BlogPosting',
+			'headline'         => wp_strip_all_tags( get_the_title() ),
+			'description'      => grow_descripcion(),
+			'image'            => $imagen,
+			'datePublished'    => get_the_date( 'c' ),
+			'dateModified'     => get_the_modified_date( 'c' ),
+			'inLanguage'       => 'es-CO',
+			'author'           => array( '@type' => 'Organization', 'name' => 'Grow Finance', 'url' => home_url( '/' ) ),
+			'publisher'        => array(
+				'@type' => 'Organization',
+				'name'  => 'Grow Finance',
+				'logo'  => array( '@type' => 'ImageObject', 'url' => $logo ),
+			),
+			'mainEntityOfPage' => array( '@type' => 'WebPage', '@id' => get_permalink() ),
+		);
+	} elseif ( is_front_page() && ! is_home() ) {
+		$datos = array(
+			'@context'    => 'https://schema.org',
+			'@type'       => 'ProfessionalService',
+			'name'        => 'Grow Finance',
+			'description' => grow_descripcion(),
+			'url'         => home_url( '/' ),
+			'image'       => $logo,
+			'telephone'   => '+57 300 738 4060',
+			'email'       => 'hola@growfinance.co',
+			'areaServed'  => 'CO',
+			'sameAs'      => array(
+				'https://instagram.com/growxfinance',
+				'https://linkedin.com/company/www.growfinance.co',
+				'https://youtube.com/@GrowxFinance2026',
+			),
+		);
+	} else {
+		return;
+	}
+
+	echo '<script type="application/ld+json">'
+		. wp_json_encode( $datos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
+		. '</script>' . "\n";
+}
+add_action( 'wp_head', 'grow_datos_estructurados', 6 );
+
+/**
  * Icono del sitio, si no se ha configurado uno desde el personalizador.
  */
 function grow_favicon() {
@@ -211,6 +320,102 @@ function grow_gtm_body() {
 	);
 }
 add_action( 'wp_body_open', 'grow_gtm_body' );
+
+/**
+ * Fuerza el uso de front-page.php en la portada.
+ *
+ * Elementor engancha template_include y, cuando la página tiene asignado uno
+ * de sus diseños ("Full Width" o "Canvas"), devuelve su propia plantilla y se
+ * salta la jerarquía del tema. El resultado es que la portada seguía
+ * mostrando el contenido antiguo maquetado con Elementor.
+ *
+ * También cubre el caso de páginas con plantillas heredadas del tema anterior
+ * (page_front-page.php), que ya no existen aquí.
+ *
+ * La prioridad alta asegura que se ejecute después de Elementor.
+ *
+ * @param string $template Ruta de la plantilla que se va a cargar.
+ * @return string Ruta definitiva.
+ */
+function grow_forzar_portada( $template ) {
+	// is_home() distingue el caso en que la portada muestra las entradas:
+	// ahí manda home.php, no front-page.php.
+	if ( is_front_page() && ! is_home() ) {
+		$portada = locate_template( 'front-page.php' );
+		if ( $portada ) {
+			return $portada;
+		}
+	}
+
+	// Las entradas del blog sufren el mismo secuestro: sin esto pierden el
+	// título como H1, la fecha, la categoría y el llamado a la acción, porque
+	// Elementor imprime solo el contenido. Las páginas quedan fuera a
+	// propósito: Servicios, Nosotros y Contacto siguen maquetadas con
+	// Elementor y deben seguir renderizándose con él.
+	if ( is_singular( 'post' ) ) {
+		$entrada = locate_template( 'single.php' );
+		if ( $entrada ) {
+			return $entrada;
+		}
+	}
+
+	return $template;
+}
+add_filter( 'template_include', 'grow_forzar_portada', 999 );
+
+/**
+ * Retira los recursos de Elementor en la portada.
+ *
+ * La portada ya no usa Elementor, pero el plugin sigue encolando su CSS y su
+ * JavaScript. Son cientos de kilobytes en la página más visitada del sitio.
+ * Solo se retira aquí: el resto de páginas mantiene Elementor intacto.
+ */
+function grow_sin_elementor_en_portada() {
+	if ( ! is_front_page() || is_home() ) {
+		return;
+	}
+
+	// Se filtra por patrón y no por una lista de nombres: Elementor genera
+	// identificadores que dependen del sitio (elementor-post-3, widget-*,
+	// elementor-gf-* para sus tipografías) y una lista fija se queda corta.
+	foreach ( array( wp_styles(), wp_scripts() ) as $cola ) {
+		$es_estilo = ( $cola instanceof WP_Styles );
+		foreach ( (array) $cola->queue as $handle ) {
+			$src = isset( $cola->registered[ $handle ] ) ? (string) $cola->registered[ $handle ]->src : '';
+			$de_elementor = ( 0 === strpos( $handle, 'elementor' ) )
+				|| ( 0 === strpos( $handle, 'e-' ) )
+				|| ( false !== strpos( $src, '/plugins/elementor' ) );
+
+			if ( $de_elementor ) {
+				if ( $es_estilo ) {
+					wp_dequeue_style( $handle );
+				} else {
+					wp_dequeue_script( $handle );
+				}
+			}
+		}
+	}
+}
+add_action( 'wp_enqueue_scripts', 'grow_sin_elementor_en_portada', 200 );
+
+/**
+ * Título del documento en la portada.
+ *
+ * Sin esto se usaría el nombre del sitio guardado en Ajustes, que sigue
+ * siendo el del sitio anterior.
+ *
+ * @param array $partes Partes del título que compone WordPress.
+ * @return array
+ */
+function grow_titulo_portada( $partes ) {
+	if ( is_front_page() && ! is_home() ) {
+		$partes['title']   = 'Grow Finance — Dirección Financiera Estratégica para empresas en crecimiento';
+		$partes['tagline'] = '';
+		unset( $partes['site'] );
+	}
+	return $partes;
+}
+add_filter( 'document_title_parts', 'grow_titulo_portada' );
 
 /**
  * Direcciones del sitio anterior que ya no existen.
